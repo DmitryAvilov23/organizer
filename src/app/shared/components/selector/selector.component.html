@@ -1,0 +1,12 @@
+<div class="selector">
+  <button (click)="changeActualMonth(-1)" class="selector__button selector__button--prev">
+    <i class="mdi mdi-arrow-left"></i>
+  </button>
+
+  <span class="date selector__date">{{ date$ | async | moment }}</span>
+
+  <button (click)="changeActualMonth(1)" class="selector__button selector__button--prev">
+    <i class="mdi mdi-arrow-right"></i>
+  </button>
+</div>
+<!-- /.selector -->
