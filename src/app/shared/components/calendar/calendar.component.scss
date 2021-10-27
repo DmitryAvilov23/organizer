@@ -1,0 +1,37 @@
+table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+
+  td,
+  th {
+    border: 1px solid black;
+    padding: 0.5rem 1rem;
+  }
+
+  td {
+    text-align: center;
+    transition: 0.4s;
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0.5;
+    }
+
+    &:hover:not(.disabled) {
+      background: #eee;
+    }
+
+    span {
+      &.active {
+        color: var(--primary-red);
+        font-weight: bold;
+      }
+
+      &.selected {
+        font-weight: bold;
+        color: blue;
+      }
+    }
+  }
+}
