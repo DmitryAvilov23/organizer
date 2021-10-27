@@ -7,7 +7,7 @@
 }
 
 :root {
-  --primary-blue: #004391;
+  --primary-red: rgb(145, 0, 0);
   --primary-dark: #333333;
   --primary-light: #f4f4f4;
 }
@@ -21,7 +21,7 @@ body {
 }
 
 a {
-  color: var(--primary-blue);
+  color: var(--primary-red);
   text-decoration: none;
 
   &:hover {
@@ -38,7 +38,7 @@ input {
   width: 100%;
   padding: 0.4rem;
   font-size: 1.2rem;
-  border: 1px solid var(--primary-blue);
+  border: 1px solid var(--primary-red);
   margin-bottom: 0.5rem;
 }
 
@@ -54,23 +54,20 @@ button {
   width: 92%;
 }
 
-table th {
-  background: var(--primary-light);
-}
-
 .button {
   display: inline-block;
-  background: var(--primary-dark);
-  padding: 0.4rem 1.3rem;
+  background: var(--primary-red);
+  color: var(--primary-light);
+  padding: 0.8rem 1.3rem;
   font-size: 1rem;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s;
 
   &:disabled {
-    cursor: "not-allowed";
-    background: var(--primary-light);
-    color: var(--primary-dark);
+    cursor: not-allowed;
+    background: var(--primary-dark);
+    color: var(--primary-light);
   }
 
   &:hover:not(:disabled) {
@@ -83,8 +80,12 @@ table th {
   }
 
   &--primary {
-    background: var(--primary-blue);
+    background: var(--primary-red);
   }
+}
+
+table th {
+  background: var(--primary-light);
 }
 
 .text-center {

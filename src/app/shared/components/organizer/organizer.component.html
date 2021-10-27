@@ -1,1 +1,37 @@
-<p>organizer works!</p>
+<section class="organizer">
+  <header class="organizer-header organizer__header">
+    <h3 class="organizer-header__title">
+      Organizer: <strong>{{ actualDate$ | async | moment: "YYYY.MM.DD" }}</strong>
+    </h3>
+  </header>
+  <!-- /.organizer-header organizer__header -->
+  <hr />
+
+  <main class="organizer-main organizer__main">
+    <ul class="organizer-main__tasks-wrapper">
+      <li class="organizer-task organizer-main__task">
+        <span class="organizer-task__text">
+          <strong class="organizer-task__index">1. </strong>
+
+          Name
+        </span>
+        <button class="button button--primary">Delete</button>
+      </li>
+      <!-- /.organizer-task organizer-main__task -->
+    </ul>
+    <!-- /.organizer-main__tasks-wrapper -->
+  </main>
+  <!-- /.organizer-main organizer__main -->
+
+  <footer class="organizer-footer organizer__footer">
+    <form [formGroup]="form" (ngSubmit)="createNewTask()" class="form organizer-footer__form">
+      <input formControlName="taskName" type="text" class="form__input" />
+      <button [disabled]="form.invalid" class="button form__button button--primary button--block">
+        Add new task
+      </button>
+    </form>
+    <!-- /.form organizer-footer__form -->
+  </footer>
+  <!-- /.organizer-footer organizer__footer -->
+</section>
+<!-- /.organizer -->

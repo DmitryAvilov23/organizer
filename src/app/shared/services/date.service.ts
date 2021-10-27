@@ -21,4 +21,13 @@ export class DateService {
 
     this.actualDate$.next(date);
   }
+
+  changeActualDate(date: moment.Moment) {
+    const value = this.actualDate$.value.set({
+      date: date.date(),
+      month: date.month(),
+    });
+
+    this.actualDate$.next(value);
+  }
 }
