@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  tasksUrl: "https://organizer-922ab-default-rtdb.europe-west1.firebasedatabase.app/",
+  tasksUrl: "https://organizer-922ab-default-rtdb.europe-west1.firebasedatabase.app",
 };
 
 /*
