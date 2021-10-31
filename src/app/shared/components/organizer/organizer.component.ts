@@ -9,6 +9,7 @@ import { DateService } from "./../../services/date.service";
 import { TasksService } from "./../../services/tasks.service";
 
 import { ITask } from "./../../models/interfaces";
+import { switchMap } from "rxjs/operators";
 @Component({
   selector: "app-organizer",
   templateUrl: "./organizer.component.html",
@@ -17,6 +18,8 @@ import { ITask } from "./../../models/interfaces";
 export class OrganizerComponent implements OnInit {
   form: FormGroup;
 
+  tasks: ITask[] = [];
+
   public get actualDate$(): Observable<moment.Moment> {
     return this._dateService.actualDate$;
   }
@@ -24,12 +27,14 @@ export class OrganizerComponent implements OnInit {
   constructor(private _dateService: DateService, private _tasksService: TasksService) {}
 
   ngOnInit(): void {
+    this.createActualDateSubscription();
+
     this.form = new FormGroup({
       taskName: new FormControl("", Validators.required),
     });
   }
 
-  public createNewTask() {
+  createNewTask() {
     const taskName = this.form.get("taskName").value;
     const date = this._dateService.actualDate$.value.format("YYYY-MM-DD");
 
@@ -40,11 +45,37 @@ export class OrganizerComponent implements OnInit {
 
     this._tasksService.createNewTask(task).subscribe(
       task => {
-        console.log(task);
+        this.tasks.push(task);
+        this.resetTasksForm();
       },
       error => {
         console.error(error);
       }
     );
+  }
+
+  removeTask(task: ITask) {
+    this._tasksService.removeTask(task).subscribe(
+      () => {
+        const indexToDelete = this.tasks.findIndex(t => t.id === task.id);
+
+        this.tasks.splice(indexToDelete, 1);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  private createActualDateSubscription() {
+    this._dateService.actualDate$
+      .pipe(switchMap(date => this._tasksService.getAllOrganizerTasks(date)))
+      .subscribe(tasks => {
+        this.tasks = tasks;
+      });
+  }
+
+  private resetTasksForm() {
+    this.form.reset();
   }
 }
